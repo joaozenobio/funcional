@@ -1,4 +1,4 @@
-import Data.Char
+-- import Data.Char
 
 -- Aula 1 ---------------------------------------
 
@@ -72,8 +72,8 @@ removeAll a (x : xs)
 
 -- Aula 5 ---------------------------------------
 
-capitalize :: String -> String
-capitalize xs = map toUpper xs
+-- capitalize :: String -> String
+-- capitalize xs = map toUpper xs
 
 
 withoutPrimes :: [Int] -> [Int]
@@ -122,12 +122,41 @@ concatMapFoldr f xs = foldr step base xs
   step x ac = f x ++ ac
   base = []
 
+-- Aula 7 ---------------------------------------
 
+data Shape
+     = Rectangle Float Float
+     | Circle Float
+     | Triangle Float Float
 
+area :: Shape -> Float
+area (Rectangle b h) = b * h
+area (Circle r) = 3.14 * r * r
+area (Triangle b h) = (b * h) / 2
 
+data IntTree = IntLeaf | IntNode Int IntTree IntTree
 
+countLeafNode :: IntTree -> (Int, Int)
+countLeafNode t = (countNodeAc t , countLeafAc t)
+ where
+  countLeafAc IntLeaf = 1
+  countLeafAc (IntNode _ l r) = countLeafAc l + countLeafAc r
+  countNodeAc IntLeaf = 0
+  countNodeAc (IntNode _ l r) = 1 + countNodeAc l + countNodeAc r
 
+type Name = String
+type Surname = String
+type SendOffer = Bool
 
+data Client = Client { name :: Name,
+                       surname :: Surname,
+                       offers :: SendOffer
+                     }
+
+offering :: [Client] -> [Client]
+offering xs = filter (n) xs
+ where
+  n (Client name surname offers) = offers 
 
 
 
