@@ -1,3 +1,5 @@
+{-# LANGUAGE InstanceSigs #-}
+{-
 -- import Data.Char
 
 -- Aula 1 ---------------------------------------
@@ -157,13 +159,27 @@ offering :: [Client] -> [Client]
 offering xs = filter (n) xs
  where
   n (Client name surname offers) = offers 
+-}
+-- Aula 8 ---------------------------------------
 
+data Vec3 = Vec3 Float Float Float
+instance Eq Vec3 where
+         (==) (Vec3 x y z) (Vec3 x' y' z') 
+              | x == x' && y == y' && z == z' = True
+              | otherwise = False
+ 
+data Person = 
+     Person {
+             name :: String,
+             age :: Int
+     }
+instance Eq Person where
+         (==) (Person name age) (Person name' age')
+              | name == name' = True
+              | otherwise = False
 
-
-
-
-
-
+instance Show Person where
+         show (Person name age) = name
 
 
 
